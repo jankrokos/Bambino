@@ -3,8 +3,13 @@ package com.example.bambino
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.bambino.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.datepicker.MaterialDatePicker
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,28 +19,33 @@ class MainActivity : AppCompatActivity() {
         // Handle the splash screen transition.
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.page_1 -> {
-                    // Respond to navigation item 1 click
-                    true
-                }
-                R.id.page_2 -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-                R.id.page_3 -> {
-                    // Respond to navigation item 3 click
-                    true
-                }
-                else -> false
-            }
-        }
+        val navController = findNavController(R.id.mainNavHost)
+        binding.bottomNavigation.setupWithNavController(navController)
+
+//        binding.bottomNavigation.setOnItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.homeFragment -> {
+//                    binding.topAppBar.title = "Home"
+//                    true
+//                }
+//                R.id.trackFragment -> {
+//                    // Respond to navigation item 2 click
+//                    binding.topAppBar.title = "Track"
+//                    true
+//                }
+//                R.id.memoriesFragment -> {
+//                    // Respond to navigation item 3 click
+//                    binding.topAppBar.title = "Memories"
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+
     }
 }
