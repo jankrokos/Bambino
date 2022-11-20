@@ -27,6 +27,27 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.mainNavHost)
         binding.bottomNavigation.setupWithNavController(navController)
 
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .build()
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.calendar -> {
+                    datePicker.show(supportFragmentManager, "tag")
+                    true
+                }
+                R.id.settings -> {
+                    // Handle favorite icon press
+                    true
+                }
+                else -> false
+            }
+        }
+
+
 //        binding.bottomNavigation.setOnItemSelectedListener { item ->
 //            when (item.itemId) {
 //                R.id.homeFragment -> {
