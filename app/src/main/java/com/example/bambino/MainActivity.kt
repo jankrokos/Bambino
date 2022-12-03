@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val navController = findNavController(R.id.mainNavHost)
-        binding.bottomNavigation.setupWithNavController(navController)
 
 
         val datePicker =
@@ -48,25 +47,28 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        binding.bottomNavigation.setOnItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.homeFragment -> {
-//                    binding.topAppBar.title = "Home"
-//                    true
-//                }
-//                R.id.trackFragment -> {
-//                    // Respond to navigation item 2 click
-//                    binding.topAppBar.title = "Track"
-//                    true
-//                }
-//                R.id.memoriesFragment -> {
-//                    // Respond to navigation item 3 click
-//                    binding.topAppBar.title = "Memories"
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    binding.topAppBar.title = "Home"
+                    navController.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.trackFragment -> {
+                    // Respond to navigation item 2 click
+                    binding.topAppBar.title = "Track"
+                    navController.navigate(R.id.trackFragment)
+                    true
+                }
+                R.id.memoriesFragment -> {
+                    // Respond to navigation item 3 click
+                    binding.topAppBar.title = "Memories"
+                    navController.navigate(R.id.memoriesFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
     }
 }
