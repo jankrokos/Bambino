@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".action.ActionFragment">
+
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        app:checkedButton="@id/bath_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/bath_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bath"
+            app:icon="@drawable/ic_baseline_bathtub_24" />
+
+        <Button
+            android:id="@+id/sleep_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep"
+            app:icon="@drawable/ic_baseline_bedroom_child_24" />
+
+        <Button
+            android:id="@+id/diaper_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/diaper"
+            app:icon="@drawable/ic_baseline_airline_seat_legroom_normal_24" />
+
+        <Button
+            android:id="@+id/eat_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/eat"
+            app:icon="@drawable/ic_baseline_fastfood_24" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

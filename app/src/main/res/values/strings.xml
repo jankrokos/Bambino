@@ -11,4 +11,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="page_name">Home</string>
     <string name="click_to_change_photo">Click to change photo</string>
+    <string name="bath">Bath</string>
+    <string name="sleep">Sleep</string>
+    <string name="diaper">Diaper</string>
+    <string name="eat">Eat</string>
+    <string name="add_new_activity">Add new activity</string>
 </resources>

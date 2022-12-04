@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.bambino.R
 import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.FragmentTrackBinding
 
@@ -28,6 +31,14 @@ class TrackFragment : Fragment() {
         binding.trackViewModel = trackViewModel
 
         binding.lifecycleOwner = this
+
+
+        trackViewModel.navigateToSleepQuality.observe(viewLifecycleOwner) {
+            if (it) {
+                this.findNavController().navigate(R.id.action_trackFragment_to_actionFragment)
+                trackViewModel.doneNavigating()
+            }
+        }
 
 
         return binding.root
