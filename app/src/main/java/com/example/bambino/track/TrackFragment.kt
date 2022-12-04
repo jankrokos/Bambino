@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.FragmentTrackBinding
 
 class TrackFragment : Fragment() {
@@ -14,6 +16,20 @@ class TrackFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentTrackBinding.inflate(inflater, container, false)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = ActionsDatabase.getInstance(application).actionsDatabaseDao
+        val viewModelFactory = TrackViewModelFactory(dataSource, application)
+
+        val trackViewModel =
+            ViewModelProvider(this, viewModelFactory)[TrackViewModel::class.java]
+
+
+        binding.trackViewModel = trackViewModel
+
+        binding.lifecycleOwner = this
+
+
         return binding.root
     }
 }
