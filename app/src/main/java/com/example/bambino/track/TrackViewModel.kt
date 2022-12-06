@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.bambino.database.ActionsDatabaseDao
 import com.example.bambino.database.TrackedAction
 import kotlinx.coroutines.*
@@ -28,13 +29,16 @@ class TrackViewModel(
         get() = _navigateToActionCreation
 
     fun onNewAction() {
-        val newAction = TrackedAction()
-        Log.i(
-            "TrackViewModel",
-            "newAction: ${newAction.actionId},${newAction.actionType},${newAction.actionTime}"
-        )
-        database.insert(newAction)
-        _navigateToActionCreation.value = true
+        viewModelScope.launch {
+            val newAction = TrackedAction()
+            Log.i(
+                "TrackViewModel",
+                "newAction: ${newAction.actionId},${newAction.actionType},${newAction.actionTime}"
+            )
+            insert(newAction)
+            Log.i("ActionsDatabaseDao", "XD")
+            _navigateToActionCreation.value = true
+        }
     }
 
     fun doneNavigating() {
@@ -45,31 +49,25 @@ class TrackViewModel(
 
     private var currentAction = MutableLiveData<TrackedAction?>()
 
-    private val actions = database.getAllActions()
+    val actions = database.getAllActions()
 
-    //works ^^
+    private suspend fun clear() {
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
+    }
 
-//    XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+    private suspend fun update(action: TrackedAction) {
+        withContext(Dispatchers.IO) {
+            database.update(action)
+        }
+    }
 
-//    init {
-//        initializeCurrentAction()
-//    }
-//
-//    private fun initializeCurrentAction() {
-//        uiScope.launch {
-//            currentAction.value = getCurrentActionFromDatabase()
-//        }
-//    }
-//
-//    private suspend fun getCurrentActionFromDatabase(): TrackedAction? {
-//        var action = database.getNewAction()
-//        if (action?.actionType != "Default") {
-//            action = null
-//        }
-//        return action
-//    }
-
-
+    private suspend fun insert(action: TrackedAction) {
+        withContext(Dispatchers.IO) {
+            database.insert(action)
+        }
+    }
 
 }
 

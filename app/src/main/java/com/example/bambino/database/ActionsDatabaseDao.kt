@@ -8,20 +8,16 @@ import androidx.room.*
 interface ActionsDatabaseDao {
 
     @Insert
-    fun insert(action: TrackedAction){
-        Log.i("ActionsDatabaseDao", "insert db called")
-    }
+    suspend fun insert(action: TrackedAction)
 
     @Update
-    fun update(action: TrackedAction)
+    suspend fun update(action: TrackedAction)
 
     @Query("SELECT * FROM daily_tracked_actions_table WHERE actionId = :key")
-    fun get(key: Long): TrackedAction
+    suspend fun get(key: Long): TrackedAction
 
     @Query("DELETE FROM daily_tracked_actions_table")
-    fun clear(){
-        Log.i("ActionsDatabaseDao", "clear db called")
-    }
+    suspend fun clear()
 
     @Query("SELECT * FROM daily_tracked_actions_table ORDER BY actionId DESC")
     fun getAllActions(): LiveData<List<TrackedAction>>
@@ -30,5 +26,5 @@ interface ActionsDatabaseDao {
     fun getTodayActions(day: Long): LiveData<List<TrackedAction>>
 
     @Query("SELECT * FROM daily_tracked_actions_table ORDER BY actionId DESC LIMIT 1")
-    fun getNewAction(): TrackedAction?
+    suspend fun getNewAction(): TrackedAction?
 }

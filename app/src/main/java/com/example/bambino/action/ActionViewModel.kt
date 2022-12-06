@@ -14,14 +14,14 @@ class ActionViewModel(
         get() = _navigateToTrackList
 
 
-    fun onAddAction(actionTime: Long, actionType: String) {
+    suspend fun onAddAction(actionTime: Long, actionType: String) {
         val action = database.get(trackedActionKey)
         action.actionTime = actionTime
         action.actionType = actionType
         _navigateToTrackList.value = true
     }
 
-    fun onAddAction(){
+    fun onAddAction(){ //layout using this only for testing, remember to change for the one taking 3 params
         _navigateToTrackList.value = true
     }
 

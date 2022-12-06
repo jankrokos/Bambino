@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="trackViewModel"
             type="com.example.bambino.track.TrackViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/trackFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,12 +21,18 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_new_activity"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{()->trackViewModel.onNewAction()}"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="@{()->trackViewModel.onNewAction()}"
+            android:text="@string/add_new_activity" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actions_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </RelativeLayout>
 </layout>
