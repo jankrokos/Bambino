@@ -1,5 +1,6 @@
 package com.example.bambino.track
 
+import android.annotation.SuppressLint
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bambino.R
 import com.example.bambino.database.TrackedAction
+import java.text.SimpleDateFormat
 
 class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolder>() {
 
@@ -37,9 +39,11 @@ class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolde
         private val actionTime: TextView = itemView.findViewById(R.id.action_time)
         private val actionIcon: ImageView = itemView.findViewById(R.id.action_type_icon)
 
+        @SuppressLint("SimpleDateFormat")
         fun bind(item: TrackedAction) {
             actionType.text = item.actionType
-            actionTime.text = item.actionTime.toString()
+            actionTime.text = SimpleDateFormat("'Time: 'HH:mm")
+                .format(item.actionTime).toString()
             actionIcon.setImageResource(
                 when (item.actionType) {
                     "Bath" -> R.drawable.ic_baseline_bathtub_24

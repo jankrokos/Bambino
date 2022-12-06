@@ -15,28 +15,14 @@ class TrackViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private var viewModelJob = Job()
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
-    private val uiScope = CoroutineScope((Dispatchers.Main + viewModelJob))
-
     private val _navigateToActionCreation = MutableLiveData<Boolean>()
     val navigateToActionCreation: LiveData<Boolean>
         get() = _navigateToActionCreation
 
     fun onNewAction() {
         viewModelScope.launch {
-            val newAction = TrackedAction()
-            Log.i(
-                "TrackViewModel",
-                "newAction: ${newAction.actionId},${newAction.actionType},${newAction.actionTime}"
-            )
-            insert(newAction)
-            Log.i("ActionsDatabaseDao", "XD")
+//            val newAction = TrackedAction()
+//            insert(newAction)
             _navigateToActionCreation.value = true
         }
     }
@@ -45,11 +31,24 @@ class TrackViewModel(
         _navigateToActionCreation.value = false
     }
 
-    //added vvv
 
-    private var currentAction = MutableLiveData<TrackedAction?>()
 
     val actions = database.getAllActions()
+
+//    private var currentAction = MutableLiveData<TrackedAction?>()
+//    init {
+//        initializeCurrentAction()
+//    }
+//
+//    private fun initializeCurrentAction() {
+//        viewModelScope.launch {
+//            currentAction.value = getCurrentActionFromDatabase()
+//        }
+//    }
+//
+//    private suspend fun getCurrentActionFromDatabase(): TrackedAction {
+//        return database.getNewAction()
+//    }
 
     private suspend fun clear() {
         withContext(Dispatchers.IO) {

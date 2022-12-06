@@ -26,5 +26,5 @@ interface ActionsDatabaseDao {
     fun getTodayActions(day: Long): LiveData<List<TrackedAction>>
 
     @Query("SELECT * FROM daily_tracked_actions_table ORDER BY actionId DESC LIMIT 1")
-    suspend fun getNewAction(): TrackedAction?
+    suspend fun getNewAction(): TrackedAction
 }

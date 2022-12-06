@@ -3,10 +3,14 @@ package com.example.bambino.action
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bambino.database.ActionsDatabaseDao
+import com.example.bambino.database.TrackedAction
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ActionViewModel(
-    private val trackedActionKey: Long = 0L,
     val database: ActionsDatabaseDao
 ) : ViewModel() {
     private val _navigateToTrackList = MutableLiveData<Boolean>()
@@ -15,18 +19,35 @@ class ActionViewModel(
 
 
     suspend fun onAddAction(actionTime: Long, actionType: String) {
-        val action = database.get(trackedActionKey)
-        action.actionTime = actionTime
-        action.actionType = actionType
-        _navigateToTrackList.value = true
-    }
-
-    fun onAddAction(){ //layout using this only for testing, remember to change for the one taking 3 params
-        _navigateToTrackList.value = true
+        viewModelScope.launch {
+            val action = TrackedAction()
+            action.actionTime = actionTime
+            action.actionType = actionType
+            _navigateToTrackList.value = true
+            insert(action)
+        }
     }
 
     fun doneNavigating() {
         _navigateToTrackList.value = false
+    }
+
+    private suspend fun clear() {
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
+    }
+
+    private suspend fun update(action: TrackedAction) {
+        withContext(Dispatchers.IO) {
+            database.update(action)
+        }
+    }
+
+    private suspend fun insert(action: TrackedAction) {
+        withContext(Dispatchers.IO) {
+            database.insert(action)
+        }
     }
 
 }

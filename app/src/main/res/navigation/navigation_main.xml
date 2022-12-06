@@ -29,9 +29,6 @@
         android:name="com.example.bambino.action.ActionFragment"
         android:label="fragment_action"
         tools:layout="@layout/fragment_action">
-        <argument
-            android:name="trackedActionKey"
-            app:argType="long" />
         <action
             android:id="@+id/action_actionFragment_to_trackFragment"
             app:destination="@id/trackFragment" />
