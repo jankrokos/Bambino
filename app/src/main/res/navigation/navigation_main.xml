@@ -14,7 +14,7 @@
         android:id="@+id/trackFragment"
         android:name="com.example.bambino.track.TrackFragment"
         android:label="@string/track"
-        tools:layout="@layout/fragment_track" >
+        tools:layout="@layout/fragment_track">
         <action
             android:id="@+id/action_trackFragment_to_actionFragment"
             app:destination="@id/actionFragment" />
@@ -28,7 +28,10 @@
         android:id="@+id/actionFragment"
         android:name="com.example.bambino.action.ActionFragment"
         android:label="fragment_action"
-        tools:layout="@layout/fragment_action" >
+        tools:layout="@layout/fragment_action">
+        <argument
+            android:name="trackedActionKey"
+            app:argType="long" />
         <action
             android:id="@+id/action_actionFragment_to_trackFragment"
             app:destination="@id/trackFragment" />

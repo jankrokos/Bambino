@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val navController = findNavController(R.id.mainNavHost)
-
 
         val datePicker =
             MaterialDatePicker.Builder.datePicker()

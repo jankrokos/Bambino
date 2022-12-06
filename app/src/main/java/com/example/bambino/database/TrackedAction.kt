@@ -11,8 +11,8 @@ data class TrackedAction(
     var actionId: Long = 0L,
 
     @ColumnInfo(name = "action_time")
-    var actionTime: Long = 0L,
+    var actionTime: Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "action_type")
-    var actionType: String = ""
+    var actionType: String = "Default"
 )

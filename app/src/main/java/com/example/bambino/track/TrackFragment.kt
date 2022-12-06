@@ -32,8 +32,7 @@ class TrackFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-
-        trackViewModel.navigateToSleepQuality.observe(viewLifecycleOwner) {
+        trackViewModel.navigateToActionCreation.observe(viewLifecycleOwner) {
             if (it) {
                 this.findNavController().navigate(R.id.action_trackFragment_to_actionFragment)
                 trackViewModel.doneNavigating()

@@ -16,4 +16,8 @@
     <string name="diaper">Diaper</string>
     <string name="eat">Eat</string>
     <string name="add_new_activity">Add new activity</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="description">Description</string>
+    <string name="add_activity">Add activity</string>
 </resources>
