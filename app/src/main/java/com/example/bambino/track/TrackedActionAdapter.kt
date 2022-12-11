@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bambino.R
 import com.example.bambino.database.TrackedAction
 import java.text.SimpleDateFormat
+import java.util.*
 
 class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolder>() {
 
@@ -39,17 +40,17 @@ class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolde
         private val actionTime: TextView = itemView.findViewById(R.id.action_time)
         private val actionIcon: ImageView = itemView.findViewById(R.id.action_type_icon)
 
-        @SuppressLint("SimpleDateFormat")
+
         fun bind(item: TrackedAction) {
-            actionType.text = item.actionType
-            actionTime.text = SimpleDateFormat("'Time: 'HH:mm")
+            actionType.text = "Activity: ${item.actionType}"
+            actionTime.text = SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm", Locale.UK)
                 .format(item.actionTime).toString()
             actionIcon.setImageResource(
                 when (item.actionType) {
-                    "Bath" -> R.drawable.ic_baseline_bathtub_24
-                    "Eat" -> R.drawable.ic_baseline_fastfood_24
-                    "Diaper" -> R.drawable.ic_baseline_airline_seat_legroom_normal_24
-                    "Sleep" -> R.drawable.ic_baseline_bedroom_child_24
+                    "Bath" -> R.drawable.ic_baseline_bathtub_48
+                    "Eat" -> R.drawable.ic_baseline_fastfood_48
+                    "Diaper" -> R.drawable.ic_baseline_airline_seat_legroom_normal_48
+                    "Sleep" -> R.drawable.ic_baseline_bedroom_child_48
                     else -> R.drawable.ic_baseline_cancel_24
                 }
             )

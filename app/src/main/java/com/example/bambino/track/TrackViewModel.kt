@@ -1,71 +1,67 @@
 package com.example.bambino.track
 
+
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.bambino.MainActivity
 import com.example.bambino.database.ActionsDatabaseDao
 import com.example.bambino.database.TrackedAction
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
+
 
 class TrackViewModel(
     val database: ActionsDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
 
+    private val activity = MainActivity()
+
     private val _navigateToActionCreation = MutableLiveData<Boolean>()
     val navigateToActionCreation: LiveData<Boolean>
         get() = _navigateToActionCreation
 
+    val currentTime = System.currentTimeMillis()
+    var currentDay = System.currentTimeMillis()
+    var dayEnd: Long = 86400000 + currentDay
+
+
+    fun setToday(date: Long) {
+        currentDay = date
+        dayEnd = 86400000 + currentDay
+    }
+
     fun onNewAction() {
         viewModelScope.launch {
-//            val newAction = TrackedAction()
-//            insert(newAction)
             _navigateToActionCreation.value = true
         }
+        Log.i("TrackFragment", "Between $currentDay and ${currentDay + 86400000}")
     }
+
+    fun clear(): Boolean {
+        viewModelScope.launch {
+//            database.clear()
+        }
+        return true
+    }
+
 
     fun doneNavigating() {
         _navigateToActionCreation.value = false
     }
 
-
-
     val actions = database.getAllActions()
 
-//    private var currentAction = MutableLiveData<TrackedAction?>()
-//    init {
-//        initializeCurrentAction()
-//    }
-//
-//    private fun initializeCurrentAction() {
-//        viewModelScope.launch {
-//            currentAction.value = getCurrentActionFromDatabase()
-//        }
-//    }
-//
-//    private suspend fun getCurrentActionFromDatabase(): TrackedAction {
-//        return database.getNewAction()
-//    }
+    var currentDayActions = database.getTodayActions(currentDay, dayEnd)
 
-    private suspend fun clear() {
-        withContext(Dispatchers.IO) {
-            database.clear()
-        }
-    }
-
-    private suspend fun update(action: TrackedAction) {
-        withContext(Dispatchers.IO) {
-            database.update(action)
-        }
-    }
-
-    private suspend fun insert(action: TrackedAction) {
-        withContext(Dispatchers.IO) {
-            database.insert(action)
-        }
+    fun filterDatabase(dayStart: Long, dayEnd: Long): LiveData<List<TrackedAction>> {
+        return database.getTodayActions(dayStart, dayEnd)
     }
 
 }

@@ -7,25 +7,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.bambino.MainActivity
 import com.example.bambino.R
 import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.FragmentActionBinding
+import com.example.bambino.track.TrackViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ActionFragment : Fragment() {
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    private var time = System.currentTimeMillis()
+    private var time: Long = 0
+    private var date: Long = 0
+    private var actionWhen: Long = 0
     private var type = ""
+
 
     override fun onDestroy() {
         job.cancel()
@@ -52,8 +61,9 @@ class ActionFragment : Fragment() {
 
 
         binding.addActivityButton.setOnClickListener {
-//            val time = binding.timeTextInput.editText?.text.toString().toLong()
+            actionWhen = date + time
 
+            //TYPE INPUT
             when (binding.toggleButton.checkedButtonId) {
                 R.id.bath_button ->
                     type = "Bath"
@@ -66,35 +76,50 @@ class ActionFragment : Fragment() {
             }
             Log.i("ActionFragment", "$time, $type")
             uiScope.launch(Dispatchers.IO) {
-                actionViewModel.onAddAction(time, type)
+                actionViewModel.onAddAction(actionWhen, type)
             }
         }
 
-        val picker =
+
+        //TIME INPUT
+        val timePicker =
             MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setHour(12)
                 .setMinute(10)
                 .setTitleText("Select activity time")
                 .build()
 
         binding.timeTextInput.setEndIconOnClickListener {
-            picker.show(parentFragmentManager, "tag")
+            timePicker.show(parentFragmentManager, "tag")
         }
 
-        picker.addOnPositiveButtonClickListener {
-//            binding.timeTextInput.
-////            setText("${picker.hour}:${picker.minute}")
-            Log.i("picker", "${picker.hour}:${picker.minute}")
-            time = (picker.hour * 3600000) + (picker.minute * 60000).toLong()
+        timePicker.addOnPositiveButtonClickListener {
+            Log.i("picker", "${timePicker.hour}:${timePicker.minute}")
+            actionViewModel.timeString = "${timePicker.hour}:${timePicker.minute}"
+            time = (((timePicker.hour - 1) * 3600000) + (timePicker.minute * 60000)).toLong()
         }
 
 
-//        binding.timeTextInput.setOnClickListener {
-//            pickTime()
-//        }
+        //DATE INPUT
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .build()
+
+        binding.dateTextInput.setEndIconOnClickListener {
+            datePicker.show(parentFragmentManager, "tag")
+        }
+
+        datePicker.addOnPositiveButtonClickListener {
+            actionViewModel.dateString =
+                SimpleDateFormat("yyyy.MM.dd", Locale.UK)
+                    .format(datePicker.selection).toString()
+            date = datePicker.selection!!
+        }
 
 
+        //NAVIGATING BACK TO THE LIST
         actionViewModel.navigateToTrackList.observe(viewLifecycleOwner) {
             if (it) {
                 this.findNavController().navigate(R.id.action_actionFragment_to_trackFragment)

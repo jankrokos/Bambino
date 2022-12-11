@@ -19,11 +19,14 @@ interface ActionsDatabaseDao {
     @Query("DELETE FROM daily_tracked_actions_table")
     suspend fun clear()
 
-    @Query("SELECT * FROM daily_tracked_actions_table ORDER BY actionId DESC")
+    @Query("SELECT * FROM daily_tracked_actions_table ORDER BY action_time ASC")
     fun getAllActions(): LiveData<List<TrackedAction>>
 
-    @Query("SELECT * FROM daily_tracked_actions_table WHERE action_time = :day ORDER BY actionId DESC")
-    fun getTodayActions(day: Long): LiveData<List<TrackedAction>>
+    @Query("SELECT * FROM daily_tracked_actions_table WHERE action_time > :dayStart AND action_time < :dayEnd")
+    fun getTodayActions(dayStart: Long, dayEnd: Long): LiveData<List<TrackedAction>>
+
+    @Query("SELECT * FROM daily_tracked_actions_table WHERE actionId > :id1 AND actionId < :id2")
+    fun getTest(id1: Long, id2:Long):LiveData<List<TrackedAction>>
 
     @Query("SELECT * FROM daily_tracked_actions_table ORDER BY actionId DESC LIMIT 1")
     suspend fun getNewAction(): TrackedAction

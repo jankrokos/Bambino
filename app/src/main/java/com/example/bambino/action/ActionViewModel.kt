@@ -13,9 +13,14 @@ import kotlinx.coroutines.withContext
 class ActionViewModel(
     val database: ActionsDatabaseDao
 ) : ViewModel() {
+
     private val _navigateToTrackList = MutableLiveData<Boolean>()
     val navigateToTrackList: LiveData<Boolean>
         get() = _navigateToTrackList
+
+
+    var timeString = ""
+    var dateString = ""
 
 
     suspend fun onAddAction(actionTime: Long, actionType: String) {
