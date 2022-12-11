@@ -62,6 +62,7 @@ class TrackFragment : Fragment() {
         datePicker.addOnPositiveButtonClickListener {
             trackViewModel.setToday(datePicker.selection!!)
             filterDatabase(trackViewModel.currentDay, trackViewModel.dayEnd)
+            binding.chosenDateTextView.text = trackViewModel.currentDayStr
             Log.i(
                 "TrackFragment", "${trackViewModel.currentDay} - ${trackViewModel.dayEnd}"
             )

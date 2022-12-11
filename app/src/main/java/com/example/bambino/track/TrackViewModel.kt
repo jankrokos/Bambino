@@ -29,11 +29,15 @@ class TrackViewModel(
 
     val currentTime = System.currentTimeMillis()
     var currentDay = System.currentTimeMillis()
+    var currentDayStr = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
+        .format(currentDay).toString()
     var dayEnd: Long = 86400000 + currentDay
 
 
     fun setToday(date: Long) {
         currentDay = date
+        currentDayStr = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
+            .format(currentDay).toString()
         dayEnd = 86400000 + currentDay
     }
 

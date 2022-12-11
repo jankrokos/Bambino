@@ -32,9 +32,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.topAppBar.title = SimpleDateFormat("EEE, MMM d", Locale.UK)
-            .format(today).toString()
-
         val navController = findNavController(R.id.mainNavHost)
 
         val datePicker =
