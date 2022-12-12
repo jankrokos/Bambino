@@ -39,6 +39,8 @@ class TrackFragment : Fragment() {
 
         binding.trackViewModel = trackViewModel
 
+        binding.lifecycleOwner = this
+
         adapter = TrackedActionAdapter()
         binding.actionsList.adapter = adapter
 
@@ -69,7 +71,6 @@ class TrackFragment : Fragment() {
         }
 
 
-        binding.lifecycleOwner = this
 
         trackViewModel.navigateToActionCreation.observe(viewLifecycleOwner) {
             if (it) {
