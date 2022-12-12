@@ -36,9 +36,9 @@ class HomeFragment : Fragment() {
         }
         Glide
             .with(this)
-            .load("content://com.android.providers.media.documents/document/image%3A44047")
+            .load("content://com.android.providers.media.documents/document/image%3A43999")
             .centerCrop()
-            .into(binding.familyPhoto);
+            .into(binding.familyPhoto)
 
         homeViewModel.changePhoto.observe(viewLifecycleOwner) {
             if (it) {

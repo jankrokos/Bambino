@@ -10,7 +10,7 @@ data class Memory(
     var memoryId: Long = 0L,
 
     @ColumnInfo(name = "memory_photo_uri")
-    var memoryPhotoUri: String,
+    var memoryPhotoUri: String = "",
 
     @ColumnInfo(name = "memory_date")
     var memoryDate: Long = System.currentTimeMillis(),
