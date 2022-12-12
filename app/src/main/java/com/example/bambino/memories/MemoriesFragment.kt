@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.bambino.R
 import com.example.bambino.database.MemoriesDatabase
 import com.example.bambino.databinding.FragmentMemoriesBinding
 
@@ -31,6 +33,17 @@ class MemoriesFragment : Fragment() {
 //        binding.memoriesList.adapter = adapter
 
         binding.lifecycleOwner = this
+
+
+        memoriesViewModel.navigateToMemoryCreation.observe(viewLifecycleOwner) {
+            if (it) {
+                this.findNavController()
+                    .navigate(R.id.action_memoriesFragment_to_memoryEntryFragment)
+                memoriesViewModel.doneNavigating()
+            }
+        }
+
+
 
         return binding.root
     }

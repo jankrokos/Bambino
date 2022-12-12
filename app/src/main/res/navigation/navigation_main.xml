@@ -23,7 +23,11 @@
         android:id="@+id/memoriesFragment"
         android:name="com.example.bambino.memories.MemoriesFragment"
         android:label="@string/memories"
-        tools:layout="@layout/fragment_memories" />
+        tools:layout="@layout/fragment_memories" >
+        <action
+            android:id="@+id/action_memoriesFragment_to_memoryEntryFragment"
+            app:destination="@id/memoryEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/actionFragment"
         android:name="com.example.bambino.action.ActionFragment"
@@ -32,5 +36,14 @@
         <action
             android:id="@+id/action_actionFragment_to_trackFragment"
             app:destination="@id/trackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoryEntryFragment"
+        android:name="com.example.bambino.memoentry.MemoryEntryFragment"
+        android:label="fragment_memory_entry"
+        tools:layout="@layout/fragment_memory_entry" >
+        <action
+            android:id="@+id/action_memoryEntryFragment_to_memoriesFragment"
+            app:destination="@id/memoriesFragment" />
     </fragment>
 </navigation>

@@ -10,7 +10,7 @@
             type="com.example.bambino.memories.MemoriesViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/memoriesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,6 +20,18 @@
             android:id="@+id/memories_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:scrollbars="horizontal" />
-    </LinearLayout>
+
+
+        <Button
+            android:id="@+id/add_memory_entry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/memories_list"
+            android:layout_centerHorizontal="true"
+            android:onClick="@{()->memoriesViewModel.onNewMemory()}"
+            android:text="@string/add_new_memory" />
+    </RelativeLayout>
 </layout>
