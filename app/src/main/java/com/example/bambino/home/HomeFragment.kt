@@ -1,7 +1,5 @@
 package com.example.bambino.home
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.bambino.R
 import com.example.bambino.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -34,17 +32,24 @@ class HomeFragment : Fragment() {
         binding.familyPhoto.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+
+
         Glide
             .with(this)
             .load("content://com.android.providers.media.documents/document/image%3A43999")
             .centerCrop()
+            .error(R.drawable.ic_baseline_bathtub_48)
             .into(binding.familyPhoto)
 
         homeViewModel.changePhoto.observe(viewLifecycleOwner) {
             if (it) {
+                Glide
+                    .with(this)
+                    .load(homeViewModel.familyPhotoUri.value)
+                    .centerCrop()
+                    .error(R.drawable.ic_baseline_bathtub_48)
+                    .into(binding.familyPhoto)
 
-
-//                binding.familyPhoto.setImageURI(homeViewModel.familyPhotoUri.value)
                 homeViewModel.photoChanged()
             }
         }

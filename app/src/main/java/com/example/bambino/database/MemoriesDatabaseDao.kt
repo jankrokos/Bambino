@@ -16,5 +16,5 @@ interface MemoriesDatabaseDao {
     suspend fun clear()
 
     @Query("SELECT * FROM memories_table ORDER BY memory_date ASC")
-    fun getAllActions(): LiveData<List<Memory>>
+    fun getAllMemories(): LiveData<List<Memory>>
 }

@@ -25,4 +25,5 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="add_memory">Add memory</string>
     <string name="add_new_memory">Add new memory</string>
+    <string name="memory_image">Memory image</string>
 </resources>

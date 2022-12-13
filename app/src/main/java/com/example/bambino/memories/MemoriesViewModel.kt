@@ -24,4 +24,8 @@ class MemoriesViewModel(
     fun doneNavigating() {
         _navigateToMemoryCreation.value = false
     }
+
+
+    //LIST OF MEMORIES
+    val allMemories = database.getAllMemories()
 }

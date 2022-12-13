@@ -61,7 +61,6 @@ class MemoryEntryFragment : Fragment() {
 
         memoryEntryViewModel.changePhoto.observe(viewLifecycleOwner) {
             if (it) {
-
                 Glide
                     .with(this)
                     .load(memoryEntryViewModel.memoryPhotoStringUri.value)

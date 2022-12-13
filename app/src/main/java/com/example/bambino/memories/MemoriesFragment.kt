@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.bambino.R
@@ -14,7 +15,7 @@ import com.example.bambino.databinding.FragmentMemoriesBinding
 class MemoriesFragment : Fragment() {
 
     lateinit var memoriesViewModel: MemoriesViewModel
-//    lateinit var adapter: MemoryAdapter
+    lateinit var adapter: MemoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +30,6 @@ class MemoriesFragment : Fragment() {
 
         binding.memoriesViewModel = memoriesViewModel
 
-//        adapter = MemoryAdapter()
-//        binding.memoriesList.adapter = adapter
 
         binding.lifecycleOwner = this
 
@@ -40,6 +39,15 @@ class MemoriesFragment : Fragment() {
                 this.findNavController()
                     .navigate(R.id.action_memoriesFragment_to_memoryEntryFragment)
                 memoriesViewModel.doneNavigating()
+            }
+        }
+
+        adapter = MemoryAdapter(this)
+        binding.memoriesList.adapter = adapter
+
+        memoriesViewModel.allMemories.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.data = it
             }
         }
 

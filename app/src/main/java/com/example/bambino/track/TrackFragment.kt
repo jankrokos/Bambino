@@ -45,11 +45,11 @@ class TrackFragment : Fragment() {
         binding.actionsList.adapter = adapter
 
 
-        trackViewModel.currentDayActions.observe(viewLifecycleOwner, Observer {
+        trackViewModel.currentDayActions.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.data = it
             }
-        })
+        }
 
 
         val datePicker =
