@@ -26,6 +26,13 @@ class MemoriesViewModel(
     }
 
 
+    fun clear(): Boolean {
+        viewModelScope.launch {
+            database.clear()
+        }
+        return true
+    }
+
     //LIST OF MEMORIES
     val allMemories = database.getAllMemories()
 }

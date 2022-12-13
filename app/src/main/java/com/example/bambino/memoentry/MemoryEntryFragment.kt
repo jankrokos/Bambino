@@ -1,5 +1,6 @@
 package com.example.bambino.memoentry
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -93,6 +94,8 @@ class MemoryEntryFragment : Fragment() {
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
+                val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                requireContext().contentResolver.takePersistableUriPermission(uri, flag)
                 photoStringUri = uri.toString()
                 memoryEntryViewModel.setMemoryPhotoUri(photoStringUri)
                 Log.d("PhotoPicker", "Selected URI: ${uri.toString()}")

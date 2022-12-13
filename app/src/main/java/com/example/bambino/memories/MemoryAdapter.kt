@@ -40,8 +40,8 @@ class MemoryAdapter(private val fragment: Fragment) :
 
         Glide
             .with(fragment)
-//            .load(item.memoryPhotoUri)
-            .load("content://com.android.providers.media.documents/document/image%3A43999")
+            .load(item.memoryPhotoUri)
+//            .load("content://com.android.providers.media.documents/document/image%3A43999")
             .centerCrop()
             .error(R.drawable.ic_baseline_bathtub_48)
             .into(holder.memoryPhoto)

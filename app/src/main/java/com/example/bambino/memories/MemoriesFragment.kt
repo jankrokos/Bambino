@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bambino.R
 import com.example.bambino.database.MemoriesDatabase
 import com.example.bambino.databinding.FragmentMemoriesBinding
@@ -43,6 +44,8 @@ class MemoriesFragment : Fragment() {
         }
 
         adapter = MemoryAdapter(this)
+        binding.memoriesList.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         binding.memoriesList.adapter = adapter
 
         memoriesViewModel.allMemories.observe(viewLifecycleOwner) {

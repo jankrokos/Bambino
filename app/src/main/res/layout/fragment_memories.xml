@@ -22,15 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:onLongClick="@{()->memoriesViewModel.clear()}"
             android:onClick="@{()->memoriesViewModel.onNewMemory()}"
             android:text="@string/add_new_memory" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memories_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/add_memory_entry_button"
-            android:scrollbars="vertical"
+            android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </RelativeLayout>
