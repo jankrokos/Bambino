@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bambino.R
 import com.example.bambino.database.Memory
+import com.example.bambino.track.TrackedActionAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MemoryAdapter(private val fragment: Fragment) :
+class MemoryAdapter(val fragment: Fragment) :
     RecyclerView.Adapter<MemoryAdapter.ViewHolder>() {
 
 
@@ -26,6 +27,10 @@ class MemoryAdapter(private val fragment: Fragment) :
             field = value
             notifyDataSetChanged()
         }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
@@ -37,23 +42,11 @@ class MemoryAdapter(private val fragment: Fragment) :
 
         Log.i("adapter", "${item.memoryPhotoUri} - ${Uri.parse(item.memoryPhotoUri).path}")
 
-
         Glide
             .with(fragment)
             .load(item.memoryPhotoUri)
-//            .load("content://com.android.providers.media.documents/document/image%3A43999")
             .centerCrop()
-            .error(R.drawable.ic_baseline_bathtub_48)
             .into(holder.memoryPhoto)
-
-
-//        holder.memoryPhoto.setImageResource(R.drawable.ic_launcher_background)
-//        holder.memoryPhoto.setImageURI(Uri.parse(item.memoryPhotoUri))
-
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
     }
 
 
@@ -71,20 +64,23 @@ class MemoryAdapter(private val fragment: Fragment) :
     }
 
 
-//
-//    override fun onBindViewHolder(holder: TrackedActionAdapter.ViewHolder, position: Int) {
+//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //        val item = data[position]
 //        holder.bind(item)
 //    }
 //
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackedActionAdapter.ViewHolder {
-//        return TrackedActionAdapter.ViewHolder.from(parent)
+//    override fun onCreateViewHolder(
+//        parent: ViewGroup,
+//        viewType: Int
+//    ): ViewHolder {
+//        return ViewHolder.from(parent)
 //    }
 //
 //    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val memoryPhoto: ImageView = itemView.findViewById(R.id.memory_image)
+//        private val memoryPhoto: ImageView = itemView.findViewById(R.id.memory_image_element)
 //        private val memoryDate: TextView = itemView.findViewById(R.id.memory_date)
 //        private val memoryDescription: TextView = itemView.findViewById(R.id.memory_description)
+//
 //
 //
 //
@@ -95,7 +91,7 @@ class MemoryAdapter(private val fragment: Fragment) :
 //                .centerCrop()
 //                .into(memoryPhoto)
 //
-//            memoryDate.text = SimpleDateFormat("EEEE MMM-dd-yyyy", Locale.UK)
+//            memoryDate.text = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
 //                .format(item.memoryDate).toString()
 //
 //            memoryDescription.text = item.memoryDescription

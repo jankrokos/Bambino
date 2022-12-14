@@ -3,6 +3,7 @@ package com.example.bambino.memoentry
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.example.bambino.R
 import com.example.bambino.database.MemoriesDatabase
 import com.example.bambino.databinding.FragmentMemoryEntryBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,7 +26,7 @@ class MemoryEntryFragment : Fragment() {
 
     private lateinit var memoryEntryViewModel: MemoryEntryViewModel
     private var photoStringUri: String = ""
-    private var date: Long = 0
+    private var date: Long = System.currentTimeMillis()
     private var description: String = ""
 
     override fun onCreateView(
@@ -39,11 +41,31 @@ class MemoryEntryFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory)[MemoryEntryViewModel::class.java]
         binding.memoryEntryViewModel = memoryEntryViewModel
 
+        binding.memoryDateTextInput.editText?.text = Editable.Factory.getInstance().newEditable(
+            SimpleDateFormat("dd-MM-yyyy", Locale.UK)
+                .format(date).toString()
+        )
 
         //NAVIGATING BACK TO MEMORIES SCREEN + NEW MEMORY INSERTION
         binding.addMemoryButton.setOnClickListener {
             description = binding.memoryDescriptionTextInput.editText?.text.toString()
-            memoryEntryViewModel.onAddMemory(photoStringUri, date, description)
+
+            if (photoStringUri == "") {
+                Snackbar.make(
+                    requireView(),
+                    "Select photo to create memory!",
+                    Snackbar.LENGTH_SHORT
+                )
+                    .setAction("SELECT") {
+                        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    }
+                    .show()
+            } else if (description == "") {
+                Snackbar.make(requireView(), "Description can't be empty!", Snackbar.LENGTH_SHORT)
+                    .show()
+            } else {
+                memoryEntryViewModel.onAddMemory(photoStringUri, date, description)
+            }
         }
 
         memoryEntryViewModel.navigateToMemoriesList.observe(viewLifecycleOwner) {
@@ -82,8 +104,16 @@ class MemoryEntryFragment : Fragment() {
             datePicker.show(parentFragmentManager, "tag")
         }
 
+        binding.memoryDateTextInput.setOnClickListener {
+            datePicker.show(parentFragmentManager, "tag")
+        }
+
         datePicker.addOnPositiveButtonClickListener {
             date = datePicker.selection!!
+            binding.memoryDateTextInput.editText?.text = Editable.Factory.getInstance().newEditable(
+                SimpleDateFormat("dd-MM-yyyy", Locale.UK)
+                    .format(date).toString()
+            )
         }
 
 
@@ -98,7 +128,7 @@ class MemoryEntryFragment : Fragment() {
                 requireContext().contentResolver.takePersistableUriPermission(uri, flag)
                 photoStringUri = uri.toString()
                 memoryEntryViewModel.setMemoryPhotoUri(photoStringUri)
-                Log.d("PhotoPicker", "Selected URI: ${uri.toString()}")
+                Log.d("PhotoPicker", "Selected URI: $uri")
             } else {
                 Log.d("PhotoPicker", "No media selected")
             }

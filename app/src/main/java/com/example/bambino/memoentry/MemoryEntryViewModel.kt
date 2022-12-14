@@ -12,11 +12,16 @@ import com.example.bambino.database.TrackedAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MemoryEntryViewModel(
     val database: MemoriesDatabaseDao
 ) : ViewModel() {
 
+
+    var dateStr: String = SimpleDateFormat("dd-MM-yyyy", Locale.UK)
+        .format(System.currentTimeMillis()).toString()
 
     //NAVIGATION
     private val _navigateToMemoriesList = MutableLiveData<Boolean>()
