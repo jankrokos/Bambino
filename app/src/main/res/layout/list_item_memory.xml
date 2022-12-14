@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="20dp"
-    android:layout_marginVertical="40dp">
+    android:layout_marginVertical="30dp">
 
-    <ImageView
-        android:id="@+id/memory_image_element"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/memory_image" />
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp">
 
-    <TextView
-        android:id="@+id/memory_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/memory_image_element"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/example_time" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/memory_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/memory_date"
-        android:layout_marginTop="10dp"
-        android:text="@string/lorem_ipsum" />
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/memory_image_element"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/memory_image" />
+
+            <TextView
+                android:id="@+id/memory_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/memory_image_element"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/example_time" />
+
+            <TextView
+                android:id="@+id/memory_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/memory_date"
+                android:layout_margin="10dp"
+                android:text="@string/lorem_ipsum" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
 

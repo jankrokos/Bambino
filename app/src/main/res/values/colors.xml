@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="green10">#ff003314</color>
+    <color name="green20">#ff006627</color>
+    <color name="green30">#ff00993b</color>
+    <color name="green40">#ff00cc4e</color>
+    <color name="green80">#ff99ffc0</color>
+    <color name="green90">#ffccffe0</color>
+
+    <color name="dark_green10">#ff0d260d</color>
+    <color name="dark_green20">#ff194d19</color>
+    <color name="dark_green30">#ff267326</color>
+    <color name="dark_green40">#ff339933</color>
+    <color name="dark_green80">#ffb3e6b3</color>
+    <color name="dark_green90">#ffd9f2d9</color>
+
+    <color name="violet10">#ff330033</color>
+    <color name="violet20">#ff660066</color>
+    <color name="violet30">#ff990099</color>
+    <color name="violet40">#ffcc00cc</color>
+    <color name="violet80">#ffff99ff</color>
+    <color name="violet90">#ffffccff</color>
+
+    <color name="red10">#FF410001</color>
+    <color name="red20">#FF680003</color>
+    <color name="red30">#FF930006</color>
+    <color name="red40">#FFBA1B1B</color>
+    <color name="red80">#FFFFB4A9</color>
+    <color name="red90">#FFFFDAD4</color>
+
+    <color name="grey10">#FF191C1D</color>
+    <color name="grey20">#FF2D3132</color>
+    <color name="grey90">#FFE0E3E3</color>
+    <color name="grey95">#FFEFF1F1</color>
+    <color name="grey99">#FFFBFDFD</color>
+
+    <color name="green_grey30">#FF316847</color>
+    <color name="green_grey50">#FF52ad76</color>
+    <color name="green_grey60">#FF74be92</color>
+    <color name="green_grey80">#FFbadec8</color>
+    <color name="green_grey90">#FFdcefe4</color>
+
+
 </resources>

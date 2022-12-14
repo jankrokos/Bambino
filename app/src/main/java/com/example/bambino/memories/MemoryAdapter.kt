@@ -30,7 +30,7 @@ class MemoryAdapter(private val fragment: Fragment) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
 
-        holder.memoryDate.text = SimpleDateFormat("EEEE MMM-dd-yyyy", Locale.UK)
+        holder.memoryDate.text = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
             .format(item.memoryDate).toString()
 
         holder.memoryDescription.text = item.memoryDescription
