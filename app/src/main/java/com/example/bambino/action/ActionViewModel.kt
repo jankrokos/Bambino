@@ -19,10 +19,6 @@ class ActionViewModel(
         get() = _navigateToTrackList
 
 
-    var timeString = ""
-    var dateString = ""
-
-
     suspend fun onAddAction(actionTime: Long, actionType: String) {
         viewModelScope.launch {
             val action = TrackedAction()

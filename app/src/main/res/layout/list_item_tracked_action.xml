@@ -33,8 +33,16 @@
         android:id="@+id/action_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/example_time"
+        android:text="@string/_12_30"
         app:layout_constraintBottom_toBottomOf="@+id/action_type_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/action_type_icon" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/action_type_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

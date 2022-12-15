@@ -26,4 +26,8 @@
     <string name="add_memory">Add memory</string>
     <string name="add_new_memory">Add new memory</string>
     <string name="memory_image">Memory image</string>
+    <string name="_12_30">12:30</string>
+    <string name="experience_slider">Experience slider</string>
+    <string name="provide_humour_level">Humour level:</string>
+    <string name="add_new_action">Add new action</string>
 </resources>

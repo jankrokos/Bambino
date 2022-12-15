@@ -21,14 +21,15 @@ class TrackViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val activity = MainActivity()
-
     private val _navigateToActionCreation = MutableLiveData<Boolean>()
     val navigateToActionCreation: LiveData<Boolean>
         get() = _navigateToActionCreation
 
-    val currentTime = System.currentTimeMillis()
+
     var currentDay = System.currentTimeMillis()
+    private var current = SimpleDateFormat("d MMM yyy", Locale.UK).format(currentDay)
+    private var date: Date = SimpleDateFormat("d MMM yyy", Locale.UK).parse(current)!!
+    var initialDate = date.time
     var currentDayStr = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
         .format(currentDay).toString()
     var dayEnd: Long = 86400000 + currentDay

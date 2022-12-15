@@ -50,7 +50,6 @@ class ActionFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = ActionsDatabase.getInstance(application).actionsDatabaseDao
 
-
         val viewModelFactory = ActionViewModelFactory(dataSource)
 
         val actionViewModel =
@@ -58,6 +57,17 @@ class ActionFragment : Fragment() {
 
         binding.actionViewModel = actionViewModel
 
+
+        //SETTING INITIAL DATE AND TIME
+        binding.dateTextInput.editText?.text = Editable.Factory.getInstance().newEditable(
+            SimpleDateFormat("dd-MM-yyyy", Locale.UK)
+                .format(System.currentTimeMillis()).toString()
+        )
+
+        binding.timeTextInput.editText?.text = Editable.Factory.getInstance().newEditable(
+            SimpleDateFormat("HH:mm", Locale.UK)
+                .format(System.currentTimeMillis()).toString()
+        )
 
 
         binding.addActivityButton.setOnClickListener {
@@ -95,9 +105,22 @@ class ActionFragment : Fragment() {
         }
 
         timePicker.addOnPositiveButtonClickListener {
-            Log.i("picker", "${timePicker.hour}:${timePicker.minute}")
-            actionViewModel.timeString = "${timePicker.hour}:${timePicker.minute}"
             time = (((timePicker.hour - 1) * 3600000) + (timePicker.minute * 60000)).toLong()
+
+            val hoursStr = if (timePicker.hour < 10) {
+                "0" + timePicker.hour.toString()
+            } else {
+                timePicker.hour.toString()
+            }
+
+            val minutesStr = if (timePicker.minute < 10) {
+                "0" + timePicker.minute.toString()
+            } else {
+                timePicker.minute.toString()
+            }
+
+            binding.timeTextInput.editText?.text = Editable.Factory.getInstance()
+                .newEditable("$hoursStr:$minutesStr")
         }
 
 
@@ -112,9 +135,10 @@ class ActionFragment : Fragment() {
         }
 
         datePicker.addOnPositiveButtonClickListener {
-            actionViewModel.dateString =
-                SimpleDateFormat("yyyy.MM.dd", Locale.UK)
+            binding.dateTextInput.editText?.text = Editable.Factory.getInstance().newEditable(
+                SimpleDateFormat("dd-MM-yyyy", Locale.UK)
                     .format(datePicker.selection).toString()
+            )
             date = datePicker.selection!!
         }
 
