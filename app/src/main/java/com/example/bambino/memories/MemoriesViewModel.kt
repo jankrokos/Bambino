@@ -15,6 +15,7 @@ class MemoriesViewModel(
         get() = _navigateToMemoryCreation
 
 
+    //ADDING NEW MEMORY
     fun onNewMemory() {
         viewModelScope.launch {
             _navigateToMemoryCreation.value = true
@@ -23,6 +24,21 @@ class MemoriesViewModel(
 
     fun doneNavigating() {
         _navigateToMemoryCreation.value = false
+    }
+
+
+    //EDIT EXISTING MEMORY
+    private val _navigateToEditMemory = MutableLiveData<Long?>()
+    val navigateToEditMemory
+        get() = _navigateToEditMemory
+
+
+    fun onEditMemoryClicked(id: Long) {
+        _navigateToEditMemory.value = id
+    }
+
+    fun onEditMemoryNavigated() {
+        _navigateToEditMemory.value = null
     }
 
 

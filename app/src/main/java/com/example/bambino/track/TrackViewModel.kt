@@ -2,7 +2,9 @@ package com.example.bambino.track
 
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,9 +31,10 @@ class TrackViewModel(
     var currentDay = System.currentTimeMillis()
     private var current = SimpleDateFormat("d MMM yyy", Locale.UK).format(currentDay)
     private var date: Date = SimpleDateFormat("d MMM yyy", Locale.UK).parse(current)!!
-    var initialDate = date.time
+
     var currentDayStr = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.UK)
         .format(currentDay).toString()
+
     var dayEnd: Long = 86400000 + currentDay
 
 

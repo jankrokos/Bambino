@@ -1,46 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="25dp"
-    android:layout_marginHorizontal="20dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <data>
+
+        <variable
+            name="memory"
+            type="com.example.bambino.database.Memory" />
+
+        <variable
+            name="clickListener"
+            type="com.example.bambino.memories.MemoryAdapter.MemoryListener" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="30dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="25dp">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/md_theme_dark_secondaryContainer"
+            app:cardCornerRadius="30dp">
 
-            <ImageView
-                android:id="@+id/memory_image_element"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:contentDescription="@string/memory_image" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/memory_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/memory_image_element"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:text="@string/example_time" />
+                <ImageView
+                    android:id="@+id/memory_image_element"
+                    android:layout_width="match_parent"
+                    android:layout_height="425dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/memory_image" />
 
-            <TextView
-                android:id="@+id/memory_description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/memory_date"
-                android:layout_margin="10dp"
-                android:text="@string/lorem_ipsum" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+                <TextView
+                    android:id="@+id/memory_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/memory_image_element"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/example_time"
+                    android:textColor="@color/md_theme_dark_onSecondaryContainer" />
+
+                <ImageButton
+                    android:id="@+id/edit_memory_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/memory_image_element"
+                    android:layout_alignBottom="@+id/memory_text_divider"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="-10dp"
+                    android:backgroundTint="@color/md_theme_dark_secondaryContainer"
+                    android:contentDescription="@string/edit_memory_button"
+                    android:onClick="@{()->clickListener.onClick(memory)}"
+                    android:src="@drawable/ic_baseline_edit_24" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/memory_text_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/memory_date"
+                    android:layout_marginTop="10dp"
+                    app:dividerColor="@color/md_theme_dark_onSecondaryContainer" />
+
+                <TextView
+                    android:id="@+id/memory_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/memory_text_divider"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/lorem_ipsum"
+                    android:textAlignment="center"
+                    android:textColor="@color/md_theme_dark_onSecondaryContainer"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
 

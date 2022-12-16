@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,7 +45,20 @@ class MemoriesFragment : Fragment() {
             }
         }
 
-        adapter = MemoryAdapter(this)
+        adapter = MemoryAdapter(MemoryAdapter.MemoryListener { memoryId ->
+            memoriesViewModel.onEditMemoryClicked(memoryId)
+        })
+
+
+        memoriesViewModel.navigateToEditMemory.observe(viewLifecycleOwner) { memory ->
+            memory?.let {
+                this.findNavController().navigate(
+                    MemoriesFragmentDirections.actionMemoriesFragmentToEditMemoryFragment(memory)
+                )
+                memoriesViewModel.onEditMemoryNavigated()
+            }
+        }
+
         binding.memoriesList.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -55,11 +69,9 @@ class MemoriesFragment : Fragment() {
 
         memoriesViewModel.allMemories.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
-
-
 
         return binding.root
     }

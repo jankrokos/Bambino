@@ -23,10 +23,13 @@
         android:id="@+id/memoriesFragment"
         android:name="com.example.bambino.memories.MemoriesFragment"
         android:label="@string/memories"
-        tools:layout="@layout/fragment_memories" >
+        tools:layout="@layout/fragment_memories">
         <action
             android:id="@+id/action_memoriesFragment_to_memoryEntryFragment"
             app:destination="@id/memoryEntryFragment" />
+        <action
+            android:id="@+id/action_memoriesFragment_to_editMemoryFragment"
+            app:destination="@id/editMemoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/actionFragment"
@@ -41,9 +44,21 @@
         android:id="@+id/memoryEntryFragment"
         android:name="com.example.bambino.memoentry.MemoryEntryFragment"
         android:label="fragment_memory_entry"
-        tools:layout="@layout/fragment_memory_entry" >
+        tools:layout="@layout/fragment_memory_entry">
         <action
             android:id="@+id/action_memoryEntryFragment_to_memoriesFragment"
+            app:destination="@id/memoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMemoryFragment"
+        android:name="com.example.bambino.editmemory.EditMemoryFragment"
+        android:label="fragment_edit_memory"
+        tools:layout="@layout/fragment_edit_memory">
+        <argument
+            android:name="memoryKey"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_editMemoryFragment_to_memoriesFragment"
             app:destination="@id/memoriesFragment" />
     </fragment>
 </navigation>

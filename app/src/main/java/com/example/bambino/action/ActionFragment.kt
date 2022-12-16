@@ -31,7 +31,7 @@ class ActionFragment : Fragment() {
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     private var time: Long = 0
-    private var date: Long = System.currentTimeMillis()
+    private var date: Long = System.currentTimeMillis() - 5520000
     private var actionWhen: Long = 0
     private var type = ""
 

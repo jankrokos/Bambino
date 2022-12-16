@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="memoryEntryViewModel"
-            type="com.example.bambino.memoentry.MemoryEntryViewModel" />
+            name="editMemoryViewModel"
+            type="com.example.bambino.editmemory.EditMemoryViewModel" />
     </data>
 
     <RelativeLayout
@@ -83,13 +83,26 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/add_memory_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/remove_memory_button"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/memory_description_text_input"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="8dp"
-            android:text="@string/add_memory" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->editMemoryViewModel.onDelete()}"
+            android:text="@string/delete" />
+
+        <Button
+            android:id="@+id/confirm_edit_memory_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/remove_memory_button"
+            android:layout_alignBottom="@id/remove_memory_button"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/confirm" />
 
     </RelativeLayout>
 </layout>
