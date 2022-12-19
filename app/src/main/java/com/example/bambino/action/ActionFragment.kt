@@ -16,6 +16,7 @@ import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.FragmentActionBinding
 import com.example.bambino.track.TrackViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
@@ -35,8 +36,9 @@ class ActionFragment : Fragment() {
     private val currentMinutes = Calendar.getInstance().get(Calendar.MINUTE)
 
 
-    private var time: Long = ((currentHour -1) * 3600000) + (currentMinutes * 60000).toLong()
-    private var date: Long = System.currentTimeMillis() - ((currentHour-1) * 3600000) - (currentMinutes * 60000)
+    private var time: Long = ((currentHour - 1) * 3600000) + (currentMinutes * 60000).toLong()
+    private var date: Long =
+        System.currentTimeMillis() - ((currentHour - 1) * 3600000) - (currentMinutes * 60000)
 
     private var actionWhen: Long = 0
     private var type = ""
@@ -82,6 +84,7 @@ class ActionFragment : Fragment() {
             actionWhen = date + time
 
             description = binding.descriptionTextInput.editText?.text.toString()
+
             //TYPE INPUT
             when (binding.toggleButton.checkedButtonId) {
                 R.id.bath_button ->
@@ -93,9 +96,24 @@ class ActionFragment : Fragment() {
                 R.id.sleep_button ->
                     type = "Sleep"
             }
-            Log.i("ActionFragment", "$time, $type")
-            uiScope.launch(Dispatchers.IO) {
-                actionViewModel.onAddAction(actionWhen, type, humour, description)
+
+            if (description.length > 100) {
+                Snackbar.make(
+                    requireView(),
+                    "Description can't contain over 100 characters!",
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+            } else if (description == "") {
+                Snackbar.make(
+                    requireView(),
+                    "Description can't be empty!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                uiScope.launch(Dispatchers.IO) {
+                    actionViewModel.onAddAction(actionWhen, type, humour, description)
+                }
             }
         }
 

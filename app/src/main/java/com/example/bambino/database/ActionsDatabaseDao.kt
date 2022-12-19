@@ -19,6 +19,9 @@ interface ActionsDatabaseDao {
     @Query("DELETE FROM daily_tracked_actions_table")
     suspend fun clear()
 
+    @Query("DELETE FROM daily_tracked_actions_table WHERE actionId = :key")
+    suspend fun deleteWithId(key: Long)
+
     @Query("SELECT * FROM daily_tracked_actions_table ORDER BY action_time ASC")
     fun getAllActions(): LiveData<List<TrackedAction>>
 

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,11 @@ import com.example.bambino.R
 import com.example.bambino.database.ActionsDatabase
 import com.example.bambino.databinding.FragmentTrackBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +28,15 @@ class TrackFragment : Fragment() {
     //    added
     lateinit var trackViewModel: TrackViewModel
     lateinit var adapter: TrackedActionAdapter
+
+    private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + job)
+
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +56,15 @@ class TrackFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        adapter = TrackedActionAdapter()
+        adapter = TrackedActionAdapter(TrackedActionAdapter.TrackedActionListener { actionId ->
+            trackViewModel.onShowDetails(actionId)
+        })
         binding.actionsList.adapter = adapter
 
 
         trackViewModel.currentDayActions.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
 
@@ -71,7 +88,6 @@ class TrackFragment : Fragment() {
         }
 
 
-
         trackViewModel.navigateToActionCreation.observe(viewLifecycleOwner) {
             if (it) {
                 this.findNavController()
@@ -81,16 +97,47 @@ class TrackFragment : Fragment() {
         }
 
 
+        //DETAILS
+        trackViewModel.details.observe(viewLifecycleOwner) {
+            if (it > 0) {
+                uiScope.launch {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(
+                            "${trackViewModel.getActionDetails(it).actionType} - ${
+                                SimpleDateFormat("HH:mm", Locale.UK)
+                                    .format(trackViewModel.getActionDetails(it).actionTime)
+                            }"
+                        )
+                        .setMessage(
+                            "Baby's humour: ${trackViewModel.getActionDetails(it).actionHumour} \n\nDescription: ${
+                                trackViewModel.getActionDetails(
+                                    it
+                                ).actionDescription
+                            }"
+                        ).setNeutralButton("Remove") { _, _ ->
+                            uiScope.launch {
+                                trackViewModel.deleteAction(it)
+                            }
+                        }
+                        .setPositiveButton("Close") { _, _ ->
+
+                        }
+                        .show()
+                }
+            }
+        }
+
+
+
         return binding.root
     }
 
     private fun filterDatabase(dayStart: Long, dayEnd: Long) {
         trackViewModel.filterDatabase(dayStart, dayEnd).observe(viewLifecycleOwner) { list ->
             list.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
-
     }
 
 }

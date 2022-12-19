@@ -4,6 +4,7 @@ package com.example.bambino.track
 import android.app.Application
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -52,6 +53,15 @@ class TrackViewModel(
         Log.i("TrackFragment", "Between $currentDay and ${currentDay + 86400000}")
     }
 
+
+    private val _details = MutableLiveData<Long>()
+    val details: LiveData<Long>
+        get() = _details
+
+    fun onShowDetails(actionId: Long) {
+        _details.value = actionId
+    }
+
     fun clear(): Boolean {
         viewModelScope.launch {
             database.clearDay(currentDay, dayEnd)
@@ -63,6 +73,15 @@ class TrackViewModel(
     fun doneNavigating() {
         _navigateToActionCreation.value = false
     }
+
+    suspend fun getActionDetails(id: Long): TrackedAction {
+        return database.get(id)
+    }
+
+    suspend fun deleteAction(id: Long){
+        database.deleteWithId(id)
+    }
+
 
     val actions = database.getAllActions()
 

@@ -40,5 +40,6 @@
     <string name="browse_diary">Browse diary</string>
     <string name="start_tracking_actions">Start tracking actions</string>
     <string name="capture_best_memories">Capture best memories</string>
-    <string name="welcome_back_msg">Hi, it\'s good to see you back!</string>
+    <string name="welcome_back_msg">Hi, it\'s good to have you back!</string>
+    <string name="humour_5">Humour: 5</string>
 </resources>

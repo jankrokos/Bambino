@@ -63,6 +63,9 @@ class MemoryEntryFragment : Fragment() {
             } else if (description == "") {
                 Snackbar.make(requireView(), "Description can't be empty!", Snackbar.LENGTH_SHORT)
                     .show()
+            } else if (description.length > 40) {
+                Snackbar.make(requireView(), "Description can't contain over 40 characters!", Snackbar.LENGTH_SHORT)
+                    .show()
             } else {
                 memoryEntryViewModel.onAddMemory(photoStringUri, date, description)
             }
@@ -70,7 +73,6 @@ class MemoryEntryFragment : Fragment() {
 
         memoryEntryViewModel.navigateToMemoriesList.observe(viewLifecycleOwner) {
             if (it) {
-//                Log.i("MemoEntry", "$photoStringUri, $date, $description ")
                 this.findNavController()
                     .navigate(R.id.action_memoryEntryFragment_to_memoriesFragment)
                 memoryEntryViewModel.doneNavigating()

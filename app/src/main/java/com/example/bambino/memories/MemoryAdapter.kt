@@ -26,7 +26,7 @@ class MemoryAdapter(private val clickListener: MemoryListener) :
     }
 
 
-    class ViewHolder private constructor(val binding: ListItemMemoryBinding) :
+    class ViewHolder private constructor(private val binding: ListItemMemoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Memory, clickListener: MemoryListener) {
