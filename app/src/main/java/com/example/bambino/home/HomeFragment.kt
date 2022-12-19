@@ -10,65 +10,61 @@ import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.bambino.MainActivity
 import com.example.bambino.R
 import com.example.bambino.databinding.FragmentHomeBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
 
-    private var familyUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("PhotoPicker", "oncreateviewcalled")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        binding.familyPhoto.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }
-
+        Glide
+            .with(this)
+            .load(R.drawable.welcome_back_image)
+            .centerCrop()
+            .into(binding.familyPhoto)
 
         Glide
             .with(this)
-            .load("content://com.android.providers.media.documents/document/image%3A43999")
+            .load(R.drawable.kid_eating)
             .centerCrop()
-            .error(R.drawable.ic_baseline_bathtub_48)
-            .into(binding.familyPhoto)
+            .into(binding.kidEatingPhoto)
 
-        homeViewModel.changePhoto.observe(viewLifecycleOwner) {
-            if (it) {
-                Glide
-                    .with(this)
-                    .load(homeViewModel.familyPhotoUri.value)
-                    .centerCrop()
-                    .error(R.drawable.ic_baseline_bathtub_48)
-                    .into(binding.familyPhoto)
+        Glide
+            .with(this)
+            .load(R.drawable.camera_photo_mommy)
+            .centerCrop()
+            .into(binding.makingPhotoPhoto)
 
-                homeViewModel.photoChanged()
-            }
+        binding.goToActionsAdd.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_actionFragment)
+        }
+
+        binding.goToActionsList.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_trackFragment)
+        }
+
+        binding.goToMemoAdd.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_memoryEntryFragment)
+        }
+
+        binding.goToMemoList.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_memoriesFragment)
         }
 
 
         return binding.root
     }
-
-
-    private val pickMedia =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            familyUri = uri
-            if (uri != null) {
-                Log.d("PhotoPicker", "Selected URI: ${uri.toString()}")
-                homeViewModel.setFamilyPhotoUri(uri)
-            } else {
-                Log.d("PhotoPicker", "No media selected")
-            }
-        }
-
-
 }

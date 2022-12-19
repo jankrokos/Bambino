@@ -2,21 +2,23 @@ package com.example.bambino
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import com.example.bambino.databinding.ActivityMainBinding
 
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Handle the splash screen transition.
-        val splashScreen = installSplashScreen()
-
         super.onCreate(savedInstanceState)
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition { viewModel.isLoading.value }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -24,18 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.mainNavHost)
 
-
-
-        //TOP APP BAR
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.settings -> {
-                    // Handle favorite icon press
-                    true
-                }
-                else -> false
-            }
-        }
 
         //BOTTOM NAVIGATION
         binding.bottomNavigation.setOnItemSelectedListener { item ->

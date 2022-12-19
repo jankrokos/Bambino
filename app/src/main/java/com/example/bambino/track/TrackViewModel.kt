@@ -27,8 +27,8 @@ class TrackViewModel(
     val navigateToActionCreation: LiveData<Boolean>
         get() = _navigateToActionCreation
 
-
-    var currentDay = System.currentTimeMillis()
+    private val currentHour: Int = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    var currentDay = System.currentTimeMillis() - (currentHour * 3600000)
     private var current = SimpleDateFormat("d MMM yyy", Locale.UK).format(currentDay)
     private var date: Date = SimpleDateFormat("d MMM yyy", Locale.UK).parse(current)!!
 
@@ -54,7 +54,7 @@ class TrackViewModel(
 
     fun clear(): Boolean {
         viewModelScope.launch {
-//            database.clear()
+            database.clearDay(currentDay, dayEnd)
         }
         return true
     }

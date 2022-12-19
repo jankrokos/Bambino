@@ -14,5 +14,11 @@ data class TrackedAction(
     var actionTime: Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "action_type")
-    var actionType: String = "Default"
+    var actionType: String = "Default",
+
+    @ColumnInfo(name = "action_humour")
+    var actionHumour: Int = 3,
+
+    @ColumnInfo(name = "action_description")
+    var actionDescription: String = ""
 )

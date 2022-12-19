@@ -33,4 +33,12 @@
     <string name="edit_memory_button">Edit memory button</string>
     <string name="delete">Delete</string>
     <string name="confirm">Confirm</string>
+    <string name="example_action_description">Baby slept well</string>
+    <string name="actions_record">Actions record</string>
+    <string name="add_action">Add action</string>
+    <string name="check_record">Check record</string>
+    <string name="browse_diary">Browse diary</string>
+    <string name="start_tracking_actions">Start tracking actions</string>
+    <string name="capture_best_memories">Capture best memories</string>
+    <string name="welcome_back_msg">Hi, it\'s good to see you back!</string>
 </resources>

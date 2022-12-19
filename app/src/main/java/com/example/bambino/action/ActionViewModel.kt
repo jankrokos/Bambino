@@ -1,5 +1,6 @@
 package com.example.bambino.action
 
+import android.accounts.AuthenticatorDescription
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,11 +20,18 @@ class ActionViewModel(
         get() = _navigateToTrackList
 
 
-    suspend fun onAddAction(actionTime: Long, actionType: String) {
+    suspend fun onAddAction(
+        actionTime: Long,
+        actionType: String,
+        humour: Int,
+        description: String
+    ) {
         viewModelScope.launch {
             val action = TrackedAction()
             action.actionTime = actionTime
             action.actionType = actionType
+            action.actionHumour = humour
+            action.actionDescription = description
             _navigateToTrackList.value = true
             insert(action)
         }
@@ -31,18 +39,6 @@ class ActionViewModel(
 
     fun doneNavigating() {
         _navigateToTrackList.value = false
-    }
-
-    private suspend fun clear() {
-        withContext(Dispatchers.IO) {
-            database.clear()
-        }
-    }
-
-    private suspend fun update(action: TrackedAction) {
-        withContext(Dispatchers.IO) {
-            database.update(action)
-        }
     }
 
     private suspend fun insert(action: TrackedAction) {

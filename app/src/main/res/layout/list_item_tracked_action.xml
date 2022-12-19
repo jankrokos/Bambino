@@ -10,12 +10,11 @@
         android:id="@+id/action_type_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="325dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_bathtub_48" />
 
@@ -23,9 +22,8 @@
         android:id="@+id/action_type_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/action_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/action_type_icon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/action_type_icon"
         tools:text="@string/bath" />
 
@@ -33,16 +31,28 @@
         android:id="@+id/action_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         android:text="@string/_12_30"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/action_type_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/action_type_icon" />
+
+    <TextView
+        android:id="@+id/action_humour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Humour: 5"
         app:layout_constraintBottom_toBottomOf="@+id/action_type_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/action_type_icon" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/action_type_icon"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

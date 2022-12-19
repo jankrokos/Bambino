@@ -9,7 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.example.bambino.home.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_memoryEntryFragment"
+            app:destination="@id/memoryEntryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_memoriesFragment"
+            app:destination="@id/memoriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_actionFragment"
+            app:destination="@id/actionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trackFragment"
         android:name="com.example.bambino.track.TrackFragment"

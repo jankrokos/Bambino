@@ -6,7 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TrackedAction::class], version = 1, exportSchema = false)
+@Database(entities = [TrackedAction::class], version = 2, exportSchema = false)
 abstract class ActionsDatabase : RoomDatabase() {
 
     abstract val actionsDatabaseDao: ActionsDatabaseDao

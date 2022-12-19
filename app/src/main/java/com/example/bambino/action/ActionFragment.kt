@@ -30,10 +30,18 @@ class ActionFragment : Fragment() {
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    private var time: Long = 0
-    private var date: Long = System.currentTimeMillis() - 5520000
+
+    private val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    private val currentMinutes = Calendar.getInstance().get(Calendar.MINUTE)
+
+
+    private var time: Long = ((currentHour -1) * 3600000) + (currentMinutes * 60000).toLong()
+    private var date: Long = System.currentTimeMillis() - ((currentHour-1) * 3600000) - (currentMinutes * 60000)
+
     private var actionWhen: Long = 0
     private var type = ""
+    private var humour = 3
+    private var description = ""
 
 
     override fun onDestroy() {
@@ -73,6 +81,7 @@ class ActionFragment : Fragment() {
         binding.addActivityButton.setOnClickListener {
             actionWhen = date + time
 
+            description = binding.descriptionTextInput.editText?.text.toString()
             //TYPE INPUT
             when (binding.toggleButton.checkedButtonId) {
                 R.id.bath_button ->
@@ -86,7 +95,7 @@ class ActionFragment : Fragment() {
             }
             Log.i("ActionFragment", "$time, $type")
             uiScope.launch(Dispatchers.IO) {
-                actionViewModel.onAddAction(actionWhen, type)
+                actionViewModel.onAddAction(actionWhen, type, humour, description)
             }
         }
 
@@ -142,6 +151,11 @@ class ActionFragment : Fragment() {
             date = datePicker.selection!!
         }
 
+
+        //HUMOUR INPUT
+        binding.slider.addOnChangeListener { _, value, _ ->
+            humour = value.toInt()
+        }
 
         //NAVIGATING BACK TO THE LIST
         actionViewModel.navigateToTrackList.observe(viewLifecycleOwner) {

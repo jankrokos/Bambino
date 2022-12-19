@@ -39,11 +39,12 @@ class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolde
         private val actionType: TextView = itemView.findViewById(R.id.action_type_string)
         private val actionTime: TextView = itemView.findViewById(R.id.action_time)
         private val actionIcon: ImageView = itemView.findViewById(R.id.action_type_icon)
+        private val actionHumour: TextView = itemView.findViewById(R.id.action_humour)
 
 
         fun bind(item: TrackedAction) {
             actionType.text = "Activity: ${item.actionType}"
-            actionTime.text = SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm", Locale.UK)
+            actionTime.text = SimpleDateFormat("HH:mm", Locale.UK)
                 .format(item.actionTime).toString()
             actionIcon.setImageResource(
                 when (item.actionType) {
@@ -54,6 +55,8 @@ class TrackedActionAdapter : RecyclerView.Adapter<TrackedActionAdapter.ViewHolde
                     else -> R.drawable.ic_baseline_cancel_24
                 }
             )
+            actionHumour.text = "Humour: ${item.actionHumour}"
+
         }
 
         companion object {
