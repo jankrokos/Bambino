@@ -73,8 +73,10 @@ class MemoryEntryFragment : Fragment() {
 
         memoryEntryViewModel.navigateToMemoriesList.observe(viewLifecycleOwner) {
             if (it) {
-                this.findNavController()
-                    .navigate(R.id.action_memoryEntryFragment_to_memoriesFragment)
+//                this.findNavController()
+//                    .navigate(R.id.action_memoryEntryFragment_to_memoriesFragment)
+                this.findNavController().navigateUp()
+
                 memoryEntryViewModel.doneNavigating()
             }
         }

@@ -178,7 +178,8 @@ class ActionFragment : Fragment() {
         //NAVIGATING BACK TO THE LIST
         actionViewModel.navigateToTrackList.observe(viewLifecycleOwner) {
             if (it) {
-                this.findNavController().navigate(R.id.action_actionFragment_to_trackFragment)
+//                this.findNavController().navigate(R.id.action_actionFragment_to_trackFragment)
+                this.findNavController().navigateUp()
                 actionViewModel.doneNavigating()
             }
         }

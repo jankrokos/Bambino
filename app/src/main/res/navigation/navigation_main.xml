@@ -30,7 +30,11 @@
         tools:layout="@layout/fragment_track">
         <action
             android:id="@+id/action_trackFragment_to_actionFragment"
-            app:destination="@id/actionFragment" />
+            app:destination="@id/actionFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/slide_out_down"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_out_up" />
     </fragment>
     <fragment
         android:id="@+id/memoriesFragment"
@@ -39,10 +43,18 @@
         tools:layout="@layout/fragment_memories">
         <action
             android:id="@+id/action_memoriesFragment_to_memoryEntryFragment"
-            app:destination="@id/memoryEntryFragment" />
+            app:destination="@id/memoryEntryFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/slide_out_down"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_out_up" />
         <action
             android:id="@+id/action_memoriesFragment_to_editMemoryFragment"
-            app:destination="@id/editMemoryFragment" />
+            app:destination="@id/editMemoryFragment"
+            app:enterAnim="@anim/fade_in_quick"
+            app:exitAnim="@anim/fade_out_quick"
+            app:popEnterAnim="@anim/fade_in_quick"
+            app:popExitAnim="@anim/fade_out_quick" />
     </fragment>
     <fragment
         android:id="@+id/actionFragment"
@@ -51,7 +63,11 @@
         tools:layout="@layout/fragment_action">
         <action
             android:id="@+id/action_actionFragment_to_trackFragment"
-            app:destination="@id/trackFragment" />
+            app:destination="@id/trackFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_out_up"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_out_up" />
     </fragment>
     <fragment
         android:id="@+id/memoryEntryFragment"
@@ -60,7 +76,9 @@
         tools:layout="@layout/fragment_memory_entry">
         <action
             android:id="@+id/action_memoryEntryFragment_to_memoriesFragment"
-            app:destination="@id/memoriesFragment" />
+            app:destination="@id/memoriesFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_out_up" />
     </fragment>
     <fragment
         android:id="@+id/editMemoryFragment"
@@ -72,6 +90,8 @@
             app:argType="long" />
         <action
             android:id="@+id/action_editMemoryFragment_to_memoriesFragment"
-            app:destination="@id/memoriesFragment" />
+            app:destination="@id/memoriesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 </navigation>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -114,13 +115,36 @@ class TrackFragment : Fragment() {
                                     it
                                 ).actionDescription
                             }"
-                        ).setNeutralButton("Remove") { _, _ ->
+                        ).setNegativeButton("Remove") { _, _ ->
                             uiScope.launch {
                                 trackViewModel.deleteAction(it)
                             }
                         }
                         .setPositiveButton("Close") { _, _ ->
 
+                        }
+                        .setNeutralButton("Share") { _, _ ->
+                            uiScope.launch {
+                                startActivity(
+                                    ShareCompat.IntentBuilder(requireActivity())
+                                        .setText(
+                                            "Activity: ${trackViewModel.getActionDetails(it).actionType} took place on ${
+                                                SimpleDateFormat("EEEE, d MMM yyyy", Locale.UK)
+                                                    .format(trackViewModel.getActionDetails(it).actionTime)
+                                            } at ${
+                                                SimpleDateFormat("HH:mm", Locale.UK)
+                                                    .format(trackViewModel.getActionDetails(it).actionTime)
+                                            }. I evaluated child's humour as ${
+                                                trackViewModel.getActionDetails(
+                                                    it
+                                                ).actionHumour
+                                            }/6.\n${
+                                                trackViewModel.getActionDetails(it).actionDescription
+                                            }"
+                                        )
+                                        .setType("text/plain").intent
+                                )
+                            }
                         }
                         .show()
                 }
