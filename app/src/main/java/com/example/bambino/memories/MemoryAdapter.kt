@@ -67,8 +67,13 @@ class MemoryAdapter(private val clickListener: MemoryListener) :
 
     }
 
-    class MemoryListener(val clickListener: (memoryId: Long) -> Unit) {
-        fun onClick(memory: Memory) = clickListener(memory.memoryId)
+    class MemoryListener(
+        val editListener: (memoryId: Long) -> Unit,
+        val shareListener: (memoryId: Long) -> Unit
+    ) {
+        fun onEdit(memory: Memory) = editListener(memory.memoryId)
+
+        fun onShare(memory: Memory) = shareListener(memory.memoryId)
     }
 }
 

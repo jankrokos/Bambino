@@ -3,6 +3,7 @@ package com.example.bambino.memories
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.bambino.database.MemoriesDatabaseDao
+import com.example.bambino.database.Memory
 import kotlinx.coroutines.launch
 
 class MemoriesViewModel(
@@ -47,6 +48,10 @@ class MemoriesViewModel(
             database.clear()
         }
         return true
+    }
+
+    suspend fun getMemoryWithId(id: Long): Memory {
+        return database.getMemoryWithId(id)
     }
 
     //LIST OF MEMORIES

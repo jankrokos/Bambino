@@ -42,4 +42,5 @@
     <string name="capture_best_memories">Capture best memories</string>
     <string name="welcome_back_msg">Hi, it\'s good to have you back!</string>
     <string name="humour_5">Humour: 5</string>
+    <string name="share_memory_button">Share memory button</string>
 </resources>
