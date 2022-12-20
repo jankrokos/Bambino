@@ -80,4 +80,7 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
+
+    //MPAndroid Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

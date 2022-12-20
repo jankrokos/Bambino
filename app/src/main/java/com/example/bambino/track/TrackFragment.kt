@@ -96,7 +96,7 @@ class TrackFragment : Fragment() {
 
         //DETAILS
         trackViewModel.details.observe(viewLifecycleOwner) {
-            if (it > 0) {
+            it?.let {
                 uiScope.launch {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(
@@ -144,6 +144,7 @@ class TrackFragment : Fragment() {
                         }
                         .show()
                 }
+                trackViewModel.detailsShown()
             }
         }
 

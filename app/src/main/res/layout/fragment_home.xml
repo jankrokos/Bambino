@@ -1,166 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.example.bambino.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/homeFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".home.HomeFragment">
 
-
-        <TextView
-            android:id="@+id/welcome_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text= "@string/welcome_back_msg"
-            android:textSize="25sp" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/family_photo"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_below="@id/welcome_back"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:contentDescription="@string/click_to_change_photo"
-            android:focusable="true"
-            android:visibility="visible"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/track_actions_card"
-            style="?attr/materialCardViewFilledStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/family_photo"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="40dp">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/welcome_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="@string/welcome_back_msg"
+                android:textSize="25sp" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/family_photo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="230dp"
+                android:layout_below="@id/welcome_back"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:contentDescription="@string/click_to_change_photo"
+                android:focusable="true"
+                android:visibility="visible"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
 
-                <TextView
-                    android:id="@+id/track_memories_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:text="@string/start_tracking_actions"
-                    android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-                <ImageView
-                    android:id="@+id/kid_eating_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_below="@id/track_memories_tv" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/track_weight_card"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/family_photo"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp">
 
                 <RelativeLayout
-                    android:id="@+id/action_buttons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/kid_eating_photo"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/go_to_actions_list"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/check_record" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/go_to_actions_add"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"
-                        android:text="@string/add_action" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/track_memories_card"
-            style="?attr/materialCardViewFilledStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/track_actions_card"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/track_actions_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:text="@string/capture_best_memories"
-                    android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-                <ImageView
-                    android:id="@+id/making_photo_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_below="@id/track_actions_tv" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/track_weight_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/track_your_child_s_weight"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/weight_buttons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/chart"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/clear_chart"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/clear_data" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add_to_chart"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/add_weight" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/track_actions_card"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/track_weight_card"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp">
 
                 <RelativeLayout
-                    android:id="@+id/action_buttons_memo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/making_photo_photo"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/go_to_memo_list"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="120dp"
+                    <TextView
+                        android:id="@+id/track_memories_tv"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/browse_diary" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/start_tracking_actions"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/go_to_memo_add"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="120dp"
+                    <ImageView
+                        android:id="@+id/kid_eating_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_below="@id/track_memories_tv"
+                        android:contentDescription="@string/kid_eating_photo" />
+
+                    <RelativeLayout
+                        android:id="@+id/action_buttons"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"
-                        android:text="@string/add_memory" />
+                        android:layout_below="@id/kid_eating_photo"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/go_to_actions_list"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/check_record" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/go_to_actions_add"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/add_action" />
+                    </RelativeLayout>
+
                 </RelativeLayout>
 
-            </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/track_memories_card"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/track_actions_card"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/track_actions_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/capture_best_memories"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                    <ImageView
+                        android:id="@+id/making_photo_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_below="@id/track_actions_tv"
+                        android:contentDescription="@string/mommy_making_photo" />
+
+                    <RelativeLayout
+                        android:id="@+id/action_buttons_memo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/making_photo_photo"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/go_to_memo_list"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/browse_diary" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/go_to_memo_add"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/add_memory" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</ScrollView>
+    </ScrollView>
+</layout>

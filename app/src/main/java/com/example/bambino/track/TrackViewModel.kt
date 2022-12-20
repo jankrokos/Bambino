@@ -54,12 +54,16 @@ class TrackViewModel(
     }
 
 
-    private val _details = MutableLiveData<Long>()
-    val details: LiveData<Long>
+    private val _details = MutableLiveData<Long?>()
+    val details: LiveData<Long?>
         get() = _details
 
     fun onShowDetails(actionId: Long) {
         _details.value = actionId
+    }
+
+    fun detailsShown(){
+        _details.value = null
     }
 
     fun clear(): Boolean {

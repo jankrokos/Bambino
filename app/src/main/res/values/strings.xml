@@ -43,4 +43,11 @@
     <string name="welcome_back_msg">Hi, it\'s good to have you back!</string>
     <string name="humour_5">Humour: 5</string>
     <string name="share_memory_button">Share memory button</string>
+    <string name="track_your_child_s_weight">Track your child\'s weight</string>
+    <string name="clear_data">Clear data</string>
+    <string name="add_weight">Add weight</string>
+    <string name="kid_eating_photo">Kid eating photo</string>
+    <string name="mommy_making_photo">Mommy making photo</string>
+    <string name="dot">.</string>
+    <string name="kg">kg</string>
 </resources>
