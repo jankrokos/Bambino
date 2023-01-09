@@ -65,8 +65,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
-            android:clickable="false"
-            android:hint="@string/description"
             app:counterEnabled="true"
             app:counterMaxLength="40"
             app:endIconContentDescription="Clear text"
@@ -78,9 +76,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:inputType="text" />
+                android:hint="@string/description"
+                android:inputType="textMultiLine"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/remove_memory_button"

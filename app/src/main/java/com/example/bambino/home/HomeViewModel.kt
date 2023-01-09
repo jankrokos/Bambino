@@ -16,11 +16,6 @@ class HomeViewModel(
 ) : ViewModel() {
 
 
-
-
-
-
-
     suspend fun addNewMeasurement(date: Long, weight: Double) {
         val newWeight = Weight(measurement_date = date, measurementResult = weight)
         database.insert(newWeight)
