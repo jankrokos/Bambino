@@ -111,8 +111,10 @@ class ActionFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             } else {
-                uiScope.launch(Dispatchers.IO) {
-                    actionViewModel.onAddAction(actionWhen, type, humour, description)
+                if (validateNewAction(actionWhen, type, humour, description)) {
+                    uiScope.launch(Dispatchers.IO) {
+                        actionViewModel.onAddAction(actionWhen, type, humour, description)
+                    }
                 }
             }
         }
@@ -187,5 +189,21 @@ class ActionFragment : Fragment() {
         return binding.root
     }
 
+    fun validateNewAction(
+        actionTime: Long,
+        actionType: String,
+        humour: Int,
+        description: String
+    ): Boolean {
+        val correctTypes = listOf("Bath", "Sleep", "Eat", "Diaper")
+
+        if (actionType == "") return false
+        if (!correctTypes.contains(actionType)) return false
+        if (description == "") return false
+        if (humour < 1 || humour > 6) return false
+        if (actionTime < 0) return false
+
+        return true
+    }
 }
 
