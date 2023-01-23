@@ -74,6 +74,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/memo_description_here"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:hint="@string/description"
